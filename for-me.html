@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Me - Sebuah Kejutan Untukmu</title>
+
+    <!-- TEMPEL KODE IKON DI SINI -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,80 h60 v-15 h-60 z' fill='%23E6A4B4'/><path d='M25,65 h50 v-15 h-50 z' fill='%23F3D7CA'/><path d='M30,50 h40 v-15 h-40 z' fill='%23E6A4B4'/><path d='M47,35 h6 v10 h-6 z' fill='white'/><path d='M48,25 a3,5 0 1,0 4,0 l-2,-10 z' fill='orange'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFF8F0;
+            --text-color: #4A4A4A;
+            --primary-color: #E6A4B4;
+            --secondary-color: #F3D7CA;
+            --accent-color: #C17C74;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        #form-modal {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .form-content {
+            animation: slideUp 0.5s ease-in-out;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar" class="bg-white/70 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3">
+            <nav class="flex justify-center items-center space-x-4 md:space-x-8">
+                <a href="index.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Let's Celebrate</a>
+                <a href="galeri.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Galeri Kenangan</a>
+                <a href="challenge.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Challenge</a>
+                <a href="for-me.html" class="nav-link active text-sm md:text-base font-semibold hover:text-pink-500 transition-colors">For Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="form-start" class="min-h-[80vh] flex flex-col items-center justify-center text-center p-6">
+            <h2 class="text-4xl font-bold text-gray-800">Satu Halaman Khusus...</h2>
+            <p class="text-gray-600 mt-4 max-w-lg">Halaman ini aku sediakan khusus untukmu. Aku ingin mendengar semua kesan dan pesan darimu tentang hari ini, tentang kita, atau apa pun yang ingin kamu sampaikan.</p>
+            <button id="show-form-btn" class="mt-8 bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-colors shadow-lg text-lg">
+                Tinggalkan Pesan Untukku
+            </button>
+        </section>
+    </main>
+    
+    <!-- Form Modal -->
+    <div id="form-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4 opacity-0">
+        <div id="form-container" class="w-full max-w-2xl text-center bg-white p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center min-h-[50vh] md:min-h-[60vh]">
+            
+            <!-- Form View -->
+            <div id="form-main" class="form-content w-full">
+                <h2 class="text-3xl font-bold text-accent-color">Kesan dan Pesan darimu</h2>
+                <p class="mt-2 mb-6 text-gray-600">Tuliskan apa saja yang kamu rasakan.</p>
+                <textarea id="message-input" class="w-full h-40 p-4 border-2 border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Ceritakan semuanya di sini..."></textarea>
+                <button id="submit-message-btn" class="mt-6 bg-accent-color text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-colors shadow-lg text-lg">Kirim</button>
+            </div>
+
+            <!-- Thank You View -->
+            <div id="thank-you-view" class="form-content hidden">
+                <h2 class="text-4xl font-bold text-pink-600">Terima Kasih, Sayang!</h2>
+                <p class="mt-4 text-xl text-gray-700">Pesanmu sudah kusimpan baik-baik di dalam hati. Aku sangat menghargainya.</p>
+                <button id="close-modal-btn" class="mt-8 inline-block bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition-colors shadow-lg text-lg">
+                    Tutup
+                </button>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="fixed bottom-4 right-4 z-40">
+        <audio id="background-music" src="/assets/audio/hbdsong.mp3" loop></audio>
+        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors"><svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Music Player Logic
+    const music = document.getElementById('background-music');
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let hasInteracted = false;
+    
+    function playMusic() {
+        music.play().then(() => {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        }).catch(error => console.log("Autoplay ditolak."));
+    }
+
+    document.body.addEventListener('click', () => {
+        if (!hasInteracted) {
+            playMusic();
+            hasInteracted = true;
+        }
+    }, { once: true });
+
+    musicControl.addEventListener('click', () => { music.paused ? playMusic() : (music.pause(), playIcon.classList.remove('hidden'), pauseIcon.classList.add('hidden')); });
+    
+    // Form Modal Logic
+    const showFormBtn = document.getElementById('show-form-btn');
+    const formModal = document.getElementById('form-modal');
+    const formMain = document.getElementById('form-main');
+    const thankYouView = document.getElementById('thank-you-view');
+    const submitMessageBtn = document.getElementById('submit-message-btn');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const messageInput = document.getElementById('message-input');
+
+    function showModal() {
+        formModal.classList.remove('hidden');
+        setTimeout(() => formModal.classList.remove('opacity-0'), 10);
+    }
+
+    function closeModal() {
+        formModal.classList.add('opacity-0');
+        setTimeout(() => {
+            formModal.classList.add('hidden');
+            // Reset form for next time
+            formMain.classList.remove('hidden');
+            thankYouView.classList.add('hidden');
+            messageInput.value = '';
+        }, 500);
+    }
+
+    showFormBtn.addEventListener('click', showModal);
+    
+    submitMessageBtn.addEventListener('click', () => {
+        // Here you could add code to save the message, e.g., send to a server or Firebase
+        console.log("Pesan yang dikirim:", messageInput.value);
+        
+        formMain.classList.add('hidden');
+        thankYouView.classList.remove('hidden');
+    });
+
+    closeModalBtn.addEventListener('click', closeModal);
+});
+</script>
+
+</body>
+</html>
+
