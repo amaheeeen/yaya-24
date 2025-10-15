@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jejak Cerita Kita - Sebuah Kejutan Untukmu</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,80 h60 v-15 h-60 z' fill='%23E6A4B4'/><path d='M25,65 h50 v-15 h-50 z' fill='%23F3D7CA'/><path d='M30,50 h40 v-15 h-40 z' fill='%23E6A4B4'/><path d='M47,35 h6 v10 h-6 z' fill='white'/><path d='M48,25 a3,5 0 1,0 4,0 l-2,-10 z' fill='orange'/></svg>">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFF8F0;
+            --text-color: #4A4A4A;
+            --primary-color: #E6A4B4;
+            --secondary-color: #F3D7CA;
+            --accent-color: #C17C74;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        #video-modal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        .map-point {
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+        .map-point:hover {
+            transform: scale(1.2);
+            animation-play-state: paused;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(230, 164, 180, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(230, 164, 180, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(230, 164, 180, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="navbar" class="bg-white/70 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3">
+            <nav class="flex justify-center items-center space-x-4 md:space-x-8">
+                <a href="index.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Let's Celebrate</a>
+                <a href="jejak-cerita.html" class="nav-link active text-sm md:text-base font-semibold hover:text-pink-500 transition-colors">Jejak Cerita Kita</a>
+                <a href="challenge.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Challenge</a>
+                <a href="janji-kita.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">Janji Kita</a>
+                <a href="for-me.html" class="nav-link text-sm md:text-base font-semibold text-gray-600 hover:text-pink-500 transition-colors">For Me</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16">
+        <section id="memory-map" class="text-center">
+            <h2 class="text-3xl font-bold mb-2">Jejak Cerita Kita</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Setiap pulau di peta ini menyimpan ucapan dan kenangan dari orang-orang yang peduli padamu. Klik hati di setiap pulau untuk menemukan harta karun di dalamnya!</p>
+            
+            <div class="relative w-full max-w-5xl mx-auto aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
+                <!-- Peta Ilustrasi -->
+                <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feDropShadow dx="3" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.15"/>
+                        </filter>
+                    </defs>
+                    <rect width="1200" height="900" fill="#F0F4F8"/>
+                    
+                    <!-- Laut -->
+                    <rect width="1200" height="900" fill="#AED9E0"/>
+
+                    <!-- Pulau-pulau -->
+                    <path d="M150 700 C 50 650, 80 500, 180 550 C 300 600, 250 750, 150 700 Z" fill="#F3D7CA" filter="url(#shadow)"/>
+                    <path d="M450 600 C 380 580, 390 450, 480 480 C 580 510, 520 620, 450 600 Z" fill="#F3D7CA" filter="url(#shadow)"/>
+                    <path d="M700 750 C 650 700, 680 600, 780 650 C 900 700, 800 800, 700 750 Z" fill="#F3D7CA" filter="url(#shadow)"/>
+                    <path d="M950 450 C 900 400, 930 300, 1030 350 C 1150 400, 1100 500, 950 450 Z" fill="#F3D7CA" filter="url(#shadow)"/>
+                    <path d="M600 250 C 550 200, 580 100, 680 150 C 800 200, 700 300, 600 250 Z" fill="#F3D7CA" filter="url(#shadow)"/>
+
+                    <!-- Elemen Peta (Gunung & Pohon) -->
+                    <path d="M130 580 L 160 530 L 190 580 Z M 150 560 L 170 530" stroke="#788896" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M730 680 L 760 630 L 790 680 Z M 750 660 L 770 630" stroke="#788896" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <circle cx="980" cy="380" r="10" fill="#87A96B"/>
+                    <line x1="980" y1="380" x2="980" y2="400" stroke="#87A96B" stroke-width="4"/>
+                    <circle cx="630" cy="180" r="10" fill="#87A96B"/>
+                    <line x1="630" y1="180" x2="630" y2="200" stroke="#87A96B" stroke-width="4"/>
+                    <circle cx="450" cy="500" r="10" fill="#87A96B"/>
+                    <line x1="450" y1="500" x2="450" y2="520" stroke="#87A96B" stroke-width="4"/>
+
+                    <!-- Jalur Antar Pulau -->
+                    <path d="M200 650 Q 300 580, 450 550 T 650 300 T 980 380 T 750 620" stroke="#C17C74" stroke-width="3" fill="none" stroke-dasharray="8 8"/>
+
+                    <text x="50" y="50" font-family="Poppins" font-size="32" fill="#4A4A4A" font-weight="600">Kepulauan Ucapan</text>
+                </svg>
+
+                <!-- Titik-titik Kenangan -->
+                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 70%; left: 12%;" data-video-src="https://www.youtube.com/embed/Sc_1D8a-FzM" data-sender="Teman 1">♥</button>
+                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 58%; left: 37%;" data-video-src="https://www.youtube.com/embed/5qap5aO4i9A" data-sender="Teman 2">♥</button>
+                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 25%; left: 52%;" data-video-src="https://www.youtube.com/embed/3tmd-ClpJxA" data-sender="Teman 3">♥</button>
+                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 42%; left: 83%;" data-video-src="https://www.youtube.com/embed/Sc_1D8a-FzM" data-sender="Teman 4">♥</button>
+                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 78%; left: 63%;" data-video-src="https://www.youtube.com/embed/5qap5aO4i9A" data-sender="Teman 5">♥</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 z-[60] hidden items-center justify-center p-4 opacity-0">
+        <div class="relative w-full max-w-4xl">
+            <button id="close-video-modal" class="absolute -top-10 right-0 w-10 h-10 text-white text-3xl">&times;</button>
+            <div id="video-player-container" class="aspect-video bg-black rounded-lg"></div>
+            <h3 id="video-sender" class="text-white text-center mt-3 font-semibold text-lg"></h3>
+        </div>
+    </div>
+    
+    <div class="fixed bottom-4 right-4 z-40">
+        <audio id="background-music" src="assets/audio/hbdsong.mp3" loop></audio>
+        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors"><svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('background-music');
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let hasInteracted = false;
+    
+    function playMusic() {
+        music.play().then(() => {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        }).catch(error => console.log("Autoplay ditolak."));
+    }
+
+    document.body.addEventListener('click', () => {
+        if (!hasInteracted) {
+            playMusic();
+            hasInteracted = true;
+        }
+    }, { once: true });
+    
+    musicControl.addEventListener('click', () => { music.paused ? playMusic() : (music.pause(), playIcon.classList.remove('hidden'), pauseIcon.classList.add('hidden')); });
+
+    const videoModal = document.getElementById('video-modal');
+    const closeVideoModalBtn = document.getElementById('close-video-modal');
+    const videoPlayerContainer = document.getElementById('video-player-container');
+    const videoSender = document.getElementById('video-sender');
+    const mapPoints = document.querySelectorAll('.map-point');
+
+    mapPoints.forEach(point => {
+        point.addEventListener('click', () => {
+            const videoSrc = point.dataset.videoSrc;
+            const senderName = point.dataset.sender;
+            if (videoSrc) {
+                videoPlayerContainer.innerHTML = `<iframe class="w-full h-full" src="${videoSrc}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                videoSender.textContent = `Ucapan dari: ${senderName}`;
+                
+                videoModal.classList.remove('hidden');
+                setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
+                videoModal.classList.add('flex');
+                
+                music.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        });
+    });
+
+    function closeVideoModal() {
+        videoModal.classList.add('opacity-0');
+        setTimeout(() => {
+            videoModal.classList.add('hidden');
+            videoModal.classList.remove('flex');
+            videoPlayerContainer.innerHTML = '';
+        }, 300);
+    }
+
+    closeVideoModalBtn.addEventListener('click', closeVideoModal);
+});
+</script>
+
+</body>
+</html>
