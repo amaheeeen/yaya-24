@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click Me - Sebuah Kejutan Untukmu</title>
 
-    <!-- TEMPEL KODE IKON DI SINI -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,80 h60 v-15 h-60 z' fill='%23E6A4B4'/><path d='M25,65 h50 v-15 h-50 z' fill='%23F3D7CA'/><path d='M30,50 h40 v-15 h-40 z' fill='%23E6A4B4'/><path d='M47,35 h6 v10 h-6 z' fill='white'/><path d='M48,25 a3,5 0 1,0 4,0 l-2,-10 z' fill='orange'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -70,53 +69,35 @@
             <h2 class="text-3xl font-bold mb-2">Aku menunggumu di sini...</h2>
             <p class="text-gray-600 mb-8">Ini adalah tempat kita akan merayakan hari spesialmu. Cepat datang, ya!</p>
             <div class="map-container aspect-video w-full rounded-lg shadow-2xl overflow-hidden bg-gray-200">
-                <!-- Bantuan: Ganti src pada <iframe> di bawah ini dengan kode embed dari Google Maps tujuan Anda -->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d167241.56582579267!2d106.77371845232447!3d-6.2369183006783375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f12ffbf51ceb%3A0xec496974c78cdb76!2sGeisha%20The%20Sushi%20Bar!5e1!3m2!1sen!2sid!4v1760157901682!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
-            <!-- Tambahkan blok kode ini setelah div peta -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d167241.56582579267!2d106.77371845232447!3d-6.2369183006783375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f12ffbf51ceb%3A0xec496974c78cdb76!2sGeisha%20The%20Sushi%20Bar!5e1!3m2!1sen!2sid!4v1760157901682!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
             <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-
-                <!-- BANTUAN: Ganti placeholder [...] dengan link Instagram tujuan Anda -->
+                 <a href="https://www.google.com/maps/dir/?api=1&destination=Geisha+The+Sushi+Bar" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-500 border border-pink-500 font-bold py-3 px-6 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Petunjuk Arah</span>
+                </a>
                 <a href="https://www.instagram.com/geishasushi.id/" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-500 border border-pink-500 font-bold py-3 px-6 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/>
                     </svg>
-                <span>Lihat Instagram</span>
+                    <span>Lihat Instagram</span>
                 </a>
-
             </div>
         </section>
     </main>
     
-    <div class="fixed bottom-4 right-4 z-40">
-        <audio id="background-music" src="/assets/audio/hbdsong.mp3" loop></audio>
-        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors"><svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+    <div id="player-container" class="fixed bottom-4 right-4 z-40">
+        <div id="youtube-player" class="absolute w-0 h-0"></div>
+        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors">
+            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </button>
     </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Music Player Logic
-    const music = document.getElementById('background-music');
-    const musicControl = document.getElementById('music-control');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    let hasInteracted = false;
-    
-    function playMusic() {
-        music.play().then(() => {
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-        }).catch(error => console.log("Autoplay ditolak."));
-    }
-
-    document.body.addEventListener('click', () => {
-        if (!hasInteracted) {
-            playMusic();
-            hasInteracted = true;
-        }
-    }, { once: true });
-
-    musicControl.addEventListener('click', () => { music.paused ? playMusic() : (music.pause(), playIcon.classList.remove('hidden'), pauseIcon.classList.add('hidden')); });
-
     // Surprise Logic
     const showSurpriseBtn = document.getElementById('show-surprise-btn');
     const buttonView = document.getElementById('button-view');
@@ -126,6 +107,73 @@ document.addEventListener('DOMContentLoaded', function() {
         buttonView.classList.add('hidden');
         mapView.classList.remove('hidden');
     });
+
+    // --- YOUTUBE PLAYER LOGIC ---
+    const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; 
+
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let player;
+    let hasInteracted = false;
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: YOUTUBE_VIDEO_ID,
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': YOUTUBE_VIDEO_ID
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Player siap
+    }
+
+    function onPlayerStateChange(event) {
+        updatePlayPauseIcon(event.data);
+    }
+
+    function updatePlayPauseIcon(state) {
+        if (state === YT.PlayerState.PLAYING) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    }
+
+    musicControl.addEventListener('click', () => {
+        if (!player) return;
+        const playerState = player.getPlayerState();
+        if (playerState === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+
+    document.body.addEventListener('click', () => {
+        if (!hasInteracted && player) {
+            player.playVideo();
+            hasInteracted = true;
+        }
+    }, { once: true });
 });
 </script>
 

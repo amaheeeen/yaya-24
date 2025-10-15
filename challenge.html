@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Challenge - Sebuah Kejutan Untukmu</title>
 
-    <!-- TEMPEL KODE IKON DI SINI -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,80 h60 v-15 h-60 z' fill='%23E6A4B4'/><path d='M25,65 h50 v-15 h-50 z' fill='%23F3D7CA'/><path d='M30,50 h40 v-15 h-40 z' fill='%23E6A4B4'/><path d='M47,35 h6 v10 h-6 z' fill='white'/><path d='M48,25 a3,5 0 1,0 4,0 l-2,-10 z' fill='orange'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -77,22 +76,17 @@
         </section>
     </main>
     
-    <!-- Quiz Modal -->
     <div id="quiz-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden grid place-items-center p-4 opacity-0">
-            <!-- TAMBAHKAN class "relative" di sini -->
-            <div id="quiz-container" class="relative w-full max-w-2xl text-center bg-white p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center min-h-[50vh] md:min-h-[60vh]">    
-                <!-- Letakkan kode ini TEPAT DI BAWAH <div id="quiz-container"... -->
-                <button id="close-quiz-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+        <div id="quiz-container" class="relative w-full max-w-2xl text-center bg-white p-8 rounded-xl shadow-2xl flex flex-col justify-center items-center min-h-[50vh] md:min-h-[60vh]">    
+            <button id="close-quiz-btn" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
             
-            <!-- Intro View -->
             <div id="quiz-intro" class="quiz-content">
                 <h2 class="text-3xl font-bold text-accent-color">Bersiaplah!</h2>
                 <p class="mt-4 text-lg text-gray-700">Pertanyaan-pertanyaan ini akan menguji seberapa dalam kamu mengingat perjalanan kita. Jawab dengan benar untuk melanjutkan. Semoga berhasil, sayang!</p>
                 <button id="begin-quiz-btn" class="mt-8 bg-pink-500 text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-colors shadow-lg text-lg">Aku Siap!</button>
             </div>
 
-            <!-- Question View -->
-            <div id="quiz-main" class="quiz-content hidden">
+            <div id="quiz-main" class="quiz-content hidden w-full">
                 <div id="progress-bar" class="w-full bg-pink-200 rounded-full h-2.5 mb-6">
                     <div id="progress-bar-fill" class="bg-pink-500 h-2.5 rounded-full" style="width: 0%"></div>
                 </div>
@@ -100,10 +94,9 @@
                 <h3 id="question-text" class="text-2xl font-bold text-gray-800 mb-6 min-h-[6rem] flex items-center justify-center"></h3>
                 <input type="text" id="answer-input" class="w-full max-w-md mx-auto p-4 text-center text-lg border-2 border-pink-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500" placeholder="Ketik jawabanmu di sini...">
                 <p id="feedback-text" class="mt-3 h-6 text-red-500 font-semibold"></p>
-                <button id="submit-answer-btn" class="mt-3 bg-accent-color texbg-white text-pink-500 border border-pink-500 font-bold py-2 px-6 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center justify-center mx-auto space-x-2">Jawab</button>
+                <button id="submit-answer-btn" class="mt-3 bg-accent-color text-white font-bold py-3 px-8 rounded-full hover:bg-pink-600 transition-colors shadow-lg text-lg">Jawab</button>
             </div>
 
-            <!-- Completion View -->
             <div id="quiz-complete" class="quiz-content hidden">
                 <h2 class="text-4xl font-bold text-pink-600">Luar Biasa!</h2>
                 <p class="mt-4 text-xl text-gray-700">Kamu berhasil menjawab semuanya dengan sempurna! Ingatanmu tentang kita benar-benar tak ternilai. Aku sangat bangga padamu.</p>
@@ -116,37 +109,17 @@
         </div>
     </div>
     
-    <div class="fixed bottom-4 right-4 z-40">
-        <audio id="background-music" src="assets/audio/hbdsong.mp3" loop></audio>
-        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors"><svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+    <div id="player-container" class="fixed bottom-4 right-4 z-40">
+        <div id="youtube-player" class="absolute w-0 h-0"></div>
+        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors">
+            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </button>
     </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Music Player Logic
-    const music = document.getElementById('background-music');
-    const musicControl = document.getElementById('music-control');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    let hasInteracted = false;
-    
-    function playMusic() {
-        music.play().then(() => {
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-        }).catch(error => console.log("Autoplay ditolak."));
-    }
-
-    document.body.addEventListener('click', () => {
-        if (!hasInteracted) {
-            playMusic();
-            hasInteracted = true;
-        }
-    }, { once: true });
-
-    musicControl.addEventListener('click', () => { music.paused ? playMusic() : (music.pause(), playIcon.classList.remove('hidden'), pauseIcon.classList.add('hidden')); });
-    
-    // New Quiz Logic
+    // Quiz Logic
     const quizData = [
         { clue: 'Tempat pertama kali kita bertemu?', answer: 'SEKOLAH' },
         { clue: 'Panggilan sayangku padamu selain \'sayang\'?', answer: 'BUBUW' },
@@ -162,10 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const startQuizBtn = document.getElementById('start-quiz-btn');
     const quizModal = document.getElementById('quiz-modal');
-    
+    const closeQuizBtn = document.getElementById('close-quiz-btn');
     const quizIntro = document.getElementById('quiz-intro');
     const beginQuizBtn = document.getElementById('begin-quiz-btn');
-    
     const quizMain = document.getElementById('quiz-main');
     const questionCounter = document.getElementById('question-counter');
     const questionText = document.getElementById('question-text');
@@ -173,27 +145,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitAnswerBtn = document.getElementById('submit-answer-btn');
     const feedbackText = document.getElementById('feedback-text');
     const progressBarFill = document.getElementById('progress-bar-fill');
-
     const quizComplete = document.getElementById('quiz-complete');
-
-    const closeQuizBtn = document.getElementById('close-quiz-btn');
-
-    function closeQuiz() {
-    quizModal.classList.add('opacity-0');
-    setTimeout(() => {
-        quizModal.classList.add('hidden');
-        // Reset kuis ke keadaan awal agar bisa dimulai lagi
-        currentQuestionIndex = 0;
-        quizIntro.classList.remove('hidden');
-        quizMain.classList.add('hidden');
-        quizComplete.classList.add('hidden');
-        updateProgressBar(); // Mengembalikan progress bar ke 0
-    }, 500);
-}
 
     function showQuizModal() {
         quizModal.classList.remove('hidden');
         setTimeout(() => quizModal.classList.remove('opacity-0'), 10);
+        if (player && typeof player.pauseVideo === 'function') {
+            player.pauseVideo();
+        }
+    }
+    
+    function closeQuiz() {
+        quizModal.classList.add('opacity-0');
+        setTimeout(() => {
+            quizModal.classList.add('hidden');
+            currentQuestionIndex = 0;
+            quizIntro.classList.remove('hidden');
+            quizMain.classList.add('hidden');
+            quizComplete.classList.add('hidden');
+            updateProgressBar();
+        }, 500);
     }
 
     function displayQuestion() {
@@ -220,7 +191,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentQuestionIndex < quizData.length) {
                 displayQuestion();
             } else {
-                // Quiz finished
                 progressBarFill.style.width = `100%`;
                 setTimeout(() => {
                     quizMain.classList.add('hidden');
@@ -237,6 +207,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     startQuizBtn.addEventListener('click', showQuizModal);
+    closeQuizBtn.addEventListener('click', closeQuiz);
 
     beginQuizBtn.addEventListener('click', () => {
         quizIntro.classList.add('hidden');
@@ -251,9 +222,75 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    closeQuizBtn.addEventListener('click', closeQuiz);
+    // --- YOUTUBE PLAYER LOGIC ---
+    const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; 
+
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let player;
+    let hasInteracted = false;
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: YOUTUBE_VIDEO_ID,
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': YOUTUBE_VIDEO_ID
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Player siap
+    }
+
+    function onPlayerStateChange(event) {
+        updatePlayPauseIcon(event.data);
+    }
+
+    function updatePlayPauseIcon(state) {
+        if (state === YT.PlayerState.PLAYING) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    }
+
+    musicControl.addEventListener('click', () => {
+        if (!player) return;
+        const playerState = player.getPlayerState();
+        if (playerState === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+
+    document.body.addEventListener('click', () => {
+        if (!hasInteracted && player) {
+            player.playVideo();
+            hasInteracted = true;
+        }
+    }, { once: true });
 });
 </script>
 
 </body>
 </html>
+

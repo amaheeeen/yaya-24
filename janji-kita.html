@@ -41,9 +41,9 @@
         .gemini-btn.loading .btn-text { display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
         #promise-result {
-             animation: fadeIn 0.5s ease-in-out;
+              animation: fadeIn 0.5s ease-in-out;
         }
-         @keyframes fadeIn {
+        @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
@@ -79,35 +79,16 @@
         <div class="bg-white rounded-lg shadow-2xl p-8 text-center max-w-sm mx-auto"><h3 id="notification-title" class="text-xl font-bold mb-4 text-gray-800">Notifikasi</h3><div id="notification-message" class="text-base mb-6 text-left text-gray-600"></div><button id="close-notification" class="bg-pink-500 text-white font-bold py-2 px-6 rounded-full hover:bg-pink-600 transition-colors">Mengerti</button></div>
     </div>
 
-    <div class="fixed bottom-4 right-4 z-40">
-        <audio id="background-music" src="assets/audio/hbdsong.mp3" loop></audio>
-        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors"><svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></button>
+    <div id="player-container" class="fixed bottom-4 right-4 z-40">
+        <div id="youtube-player" class="absolute w-0 h-0"></div>
+        <button id="music-control" class="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg text-pink-500 hover:text-pink-700 transition-colors">
+            <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        </button>
     </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const music = document.getElementById('background-music');
-    const musicControl = document.getElementById('music-control');
-    const playIcon = document.getElementById('play-icon');
-    const pauseIcon = document.getElementById('pause-icon');
-    let hasInteracted = false;
-    
-    function playMusic() {
-        music.play().then(() => {
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-        }).catch(error => console.log("Autoplay ditolak."));
-    }
-
-    document.body.addEventListener('click', () => {
-        if (!hasInteracted) {
-            playMusic();
-            hasInteracted = true;
-        }
-    }, { once: true });
-    
-    musicControl.addEventListener('click', () => { music.paused ? playMusic() : (music.pause(), playIcon.classList.remove('hidden'), pauseIcon.classList.add('hidden')); });
-
     // --- Gemini API Logic ---
     const generatePromiseBtn = document.getElementById('generate-promise-btn');
     const promiseResultContainer = document.getElementById('promise-result');
@@ -128,12 +109,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     async function callGeminiAPI(prompt, buttonElement) {
-        // PENTING: Ganti dengan API Key Anda dari Google AI Studio.
         const apiKey = "AIzaSyDIYJFe9Vz7skEB9yvmNj9inmwAIqLpuVk"; 
         
-        if (apiKey === "MASUKKAN_API_KEY_ANDA_DI_SINI") {
-            showNotification("Fitur ini membutuhkan API Key.", "Konfigurasi Diperlukan");
-            return null;
+        if (apiKey === "MASUKKAN_API_KEY_ANDA_DI_SINI" || apiKey === "AIzaSyDIYJFe9Vz7skEB9yvmNj9inmwAIqLpuVk") {
+            // Updated check to remove the specific key check
         }
 
         if(buttonElement) buttonElement.classList.add('loading');
@@ -159,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     generatePromiseBtn.addEventListener('click', async () => {
-        const prompt = "Buat sebuah 'janji' yang singkat (satu kalimat), manis, dan lucu untuk pasangan kekasih. Contoh: 'Aku berjanji akan selalu membiarkanmu mengambil gigitan pertama dari makanan penutup kita.' atau 'Aku berjanji cintaku padamu akan lebih awet dari baterai ponsel kita. anda tidak perlu memberikan respon pada awal jawaban anda, langsung buat janji nya. Jangan buat janji yang terlalu panjang, cukup satu kalimat saja.'";
+        const prompt = "Buat sebuah 'janji' yang singkat (satu kalimat), manis, dan sedikit lucu untuk pasangan kekasih. Contoh: 'Aku berjanji akan selalu membiarkanmu mengambil gigitan pertama dari makanan penutup kita.' atau 'Aku berjanji cintaku padamu akan lebih awet dari baterai ponsel kita. anda tidak perlu memberikan respon pada awal jawaban anda, langsung buat janji nya. Jangan buat janji yang terlalu panjang, cukup satu kalimat saja.'";
         
         promiseResultContainer.classList.add('hidden');
         const generatedPromise = await callGeminiAPI(prompt, generatePromiseBtn);
@@ -168,8 +147,76 @@ document.addEventListener('DOMContentLoaded', function() {
             promiseResultContainer.classList.remove('hidden');
         }
     });
+
+    // --- YOUTUBE PLAYER LOGIC ---
+    const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; 
+
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let player;
+    let hasInteracted = false;
+
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: YOUTUBE_VIDEO_ID,
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'loop': 1,
+                'playlist': YOUTUBE_VIDEO_ID
+            },
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        // Player siap
+    }
+
+    function onPlayerStateChange(event) {
+        updatePlayPauseIcon(event.data);
+    }
+
+    function updatePlayPauseIcon(state) {
+        if (state === YT.PlayerState.PLAYING) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    }
+
+    musicControl.addEventListener('click', () => {
+        if (!player) return;
+        const playerState = player.getPlayerState();
+        if (playerState === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
+
+    document.body.addEventListener('click', () => {
+        if (!hasInteracted && player) {
+            player.playVideo();
+            hasInteracted = true;
+        }
+    }, { once: true });
 });
 </script>
 
 </body>
 </html>
+
