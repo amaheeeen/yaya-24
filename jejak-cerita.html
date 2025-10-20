@@ -165,6 +165,16 @@
                         <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Sinta</h3>
                     </div>
 
+                    <div class="swiper-slide cursor-pointer" data-video-id="pV65pH-KfvY" data-sender="Mamah Nia">
+                        <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/pV65pH-KfvY/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Mamah Nia">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Mamah Nia</h3>
+                    </div>
+
                 </div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div>
@@ -206,11 +216,11 @@ document.addEventListener('DOMContentLoaded', function() {
     closeVideoModalBtn.addEventListener('click', closeVideoModal);
 
     const swiper = new Swiper('.swiper-container', {
-        effect: 'coverflow',
-        grabCursor: true,
+        loop: true,
         centeredSlides: true,
         slidesPerView: 'auto',
-        loop: true,
+        grabCursor: true,
+        effect: 'coverflow', // Menggunakan efek coverflow
         coverflowEffect: {
             rotate: 50,
             stretch: 0,
@@ -229,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
         on: {
             click: function (swiper, event) {
                 const clickedSlide = event.target.closest('.swiper-slide');
-                if (clickedSlide && swiper.clickedSlide === clickedSlide) {
+                if (clickedSlide && swiper.clickedSlide === clickedSlide) { // Memastikan hanya slide yang aktif yang diklik
                     const videoId = clickedSlide.dataset.videoId;
                     if(videoId){
                         videoPlayerContainer.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
@@ -295,4 +305,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
-
