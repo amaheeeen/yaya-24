@@ -59,7 +59,7 @@
                 </div>
             </div>
              <p class="mt-8 text-sm text-gray-400">See u @ 21 oct! ദ്ദി(˵ •̀ ᴗ - ˵ ) ✧</p>
-            <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
+             <div class="mt-8 flex flex-col sm:flex-row justify-center items-center gap-4">
                 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Kejutan+Spesial+Untukmu!&dates=20251021T000000/20251021T010000&details=Jangan+lupa+ada+kejutan+spesial+menunggumu!&location=Rahasia" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-500 border border-pink-500 font-bold py-2 px-5 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center space-x-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" /></svg>
                     <span>Simpan Tanggal</span>
@@ -104,8 +104,8 @@
         <div id="video-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden items-center justify-center p-4 opacity-0">
             <div class="relative w-full max-w-4xl">
                 <button id="close-video-btn" class="absolute -top-10 right-0 w-10 h-10 text-white text-3xl">&times;</button>
-                <div class="aspect-video">
-                    <video id="birthday-video" class="w-full h-full rounded-lg" src="assets/video/Daniel Caesar - Best Part (Audio) ft. H.E.R..mp4" controls></video>
+                <div id="video-player-container" class="aspect-video">
+                    <!-- YouTube video will be loaded here -->
                 </div>
             </div>
         </div>
@@ -202,13 +202,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const playVideoBtn = document.getElementById('play-video-btn');
         const videoModal = document.getElementById('video-modal');
         const closeVideoBtn = document.getElementById('close-video-btn');
-        const birthdayVideo = document.getElementById('birthday-video');
+        const birthdayVideoContainer = document.getElementById('video-player-container'); // Mengganti birthdayVideo
+        const YOUTUBE_BIRTHDAY_VIDEO_ID = "MDD6AVpgyUc"; // ID video YouTube ucapan
 
         playVideoBtn.addEventListener('click', () => {
             videoModal.classList.remove('hidden');
             setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
             videoModal.classList.add('flex');
-            birthdayVideo.play();
+            
+            // Memuat iframe YouTube ke dalam container
+            birthdayVideoContainer.innerHTML = `<iframe class="w-full h-full rounded-lg" src="https://www.youtube.com/embed/${YOUTUBE_BIRTHDAY_VIDEO_ID}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            
             if (player && typeof player.pauseVideo === 'function') {
                 player.pauseVideo();
             }
@@ -219,72 +223,73 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 videoModal.classList.add('hidden');
                 videoModal.classList.remove('flex');
+                birthdayVideoContainer.innerHTML = ''; // Hapus iframe saat ditutup
             }, 500);
-            birthdayVideo.pause();
-            birthdayVideo.currentTime = 0;
+            // Tidak perlu pause atau reset video, karena iframe dihapus
         }
 
         closeVideoBtn.addEventListener('click', closeVideo);
 
-        // --- YOUTUBE PLAYER LOGIC (inside initialize) ---
-        const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; 
-
-        const musicControl = document.getElementById('music-control');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
-        let hasInteracted = false;
-
-        window.onYouTubeIframeAPIReady = function() {
-            player = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: YOUTUBE_VIDEO_ID,
-                playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': YOUTUBE_VIDEO_ID },
-                events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
-            });
-        }
-
-        function onPlayerReady(event) {
-            document.body.addEventListener('click', () => {
-                if (!hasInteracted && player) {
-                    player.playVideo();
-                    hasInteracted = true;
-                }
-            }, { once: true });
-        }
-
-        function onPlayerStateChange(event) {
-            updatePlayPauseIcon(event.data);
-        }
-
-
-
-        function updatePlayPauseIcon(state) {
-            if (state === YT.PlayerState.PLAYING) {
-                playIcon.classList.add('hidden');
-                pauseIcon.classList.remove('hidden');
-            } else {
-                playIcon.classList.remove('hidden');
-                pauseIcon.classList.add('hidden');
-            }
-        }
-
-        musicControl.addEventListener('click', () => {
-            if (!player) return;
-            const playerState = player.getPlayerState();
-            if (playerState === YT.PlayerState.PLAYING) {
-                player.pauseVideo();
-            } else {
-                player.playVideo();
-            }
-        });
+        // --- YOUTUBE PLAYER LOGIC (outside initialize) ---
+        // PENTING: Pastikan player dideklarasikan secara global atau di scope yang bisa diakses
+        // Kode ini sekarang berada di luar initializeWebsite() agar player bisa diakses dari mana saja.
     }
     
-    let player; // Declare player globally
+    let player; // Deklarasikan player secara global
+    const YOUTUBE_BG_VIDEO_ID = "Xct1EdyHMWw"; // ID video YouTube untuk background music
+
+    const musicControl = document.getElementById('music-control');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    let hasInteractedPlayer = false; // Gunakan variabel berbeda agar tidak bentrok dengan hasInteracted countdown
+
     const tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     const firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function() {
+        player = new YT.Player('youtube-player', {
+            height: '0',
+            width: '0',
+            videoId: YOUTUBE_BG_VIDEO_ID,
+            playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': YOUTUBE_BG_VIDEO_ID },
+            events: { 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
+        });
+    }
+
+    function onPlayerReady(event) {
+        document.body.addEventListener('click', () => {
+            if (!hasInteractedPlayer && player) { // Gunakan hasInteractedPlayer
+                player.playVideo();
+                hasInteractedPlayer = true;
+            }
+        }, { once: true });
+    }
+
+    function onPlayerStateChange(event) {
+        updatePlayPauseIcon(event.data);
+    }
+
+    function updatePlayPauseIcon(state) {
+        if (state === YT.PlayerState.PLAYING) {
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        } else {
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+    }
+
+    musicControl.addEventListener('click', () => {
+        if (!player) return;
+        const playerState = player.getPlayerState();
+        if (playerState === YT.PlayerState.PLAYING) {
+            player.pauseVideo();
+        } else {
+            player.playVideo();
+        }
+    });
     
     startCountdown();
 });
