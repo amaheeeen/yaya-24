@@ -24,11 +24,33 @@
             background-color: var(--bg-color);
             color: var(--text-color);
         }
+        .nav-link.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
         .calendar-day.unavailable {
             background-color: #fecaca;
             color: #9ca3af;
             text-decoration: line-through;
             pointer-events: none;
+            position: relative;
+        }
+        .calendar-day.unavailable::after {
+            content: attr(data-note);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ef4444;
+            color: white;
+            padding: 1px 4px;
+            border-radius: 4px;
+            font-size: 8px;
+            white-space: nowrap;
+            display: none;
+        }
+        .calendar-day.unavailable:hover::after {
+            display: block;
         }
         .calendar-day.selected {
             background-color: var(--primary-color);
@@ -56,64 +78,21 @@
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800">A Day With Me</h1>
             <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Selamat! Kamu berhasil melewati tantangannya. Sebagai hadiah, aku sudah siapkan sebuah agenda kencan spesial untuk kita. Pilih tanggalnya, dan mari kita ciptakan kenangan baru!</p>
             
-            <div id="itinerary" class="mt-12 max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-accent-color mb-6">Our Itinerary</h2>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead class="border-b-2 border-pink-200">
-                            <tr>
-                                <th class="p-3">Waktu</th>
-                                <th class="p-3">Kegiatan</th>
-                                <th class="p-3">Lokasi</th>
-                                <th class="p-3 text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-pink-100">
-                                <td class="p-3 font-semibold">13:00 - 15:00</td>
-                                <td class="p-3">Makan siang sushi favorit kita.</td>
-                                <td class="p-3">Geisha Sushi</td>
-                                <td class="p-3">
-                                    <div class="flex justify-center items-center gap-2">
-                                        <a href="https://www.instagram.com/geishasushi.id/" target="_blank" class="p-2 rounded-full hover:bg-pink-100 transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
-                                        </a>
-                                        <a href="https://maps.app.goo.gl/y2G5zKWAb2fB93s58" target="_blank" class="p-2 rounded-full hover:bg-pink-100 transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="p-3 font-semibold">15:30 - Selesai</td>
-                                <td class="p-3">Menonton film dan bersantai.</td>
-                                <td class="p-3">XXI Kelapa Gading</td>
-                                <td class="p-3">
-                                    <div class="flex justify-center items-center gap-2">
-                                        <a href="https://www.instagram.com/cinema.21/" target="_blank" class="p-2 rounded-full hover:bg-pink-100 transition-colors">
-                                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
-                                        </a>
-                                        <a href="https://maps.app.goo.gl/B9p6tF4Xn7y1V3Zq5" target="_blank" class="p-2 rounded-full hover:bg-pink-100 transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                 <button id="download-btn" class="mt-6 bg-white text-pink-500 border border-pink-500 font-bold py-2 px-6 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center justify-center mx-auto space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
-                    <span>Download Itinerary</span>
+            <div class="mt-12 max-w-lg mx-auto bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-accent-color mb-4">Pilih Tanggal Kencan Kita</h2>
+                <div id="calendar-container" class="pb-4"></div>
+                <button id="confirm-date-btn" class="mt-4 bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition-colors shadow-lg text-lg hidden">
+                    Konfirmasi Tanggal Pilihanmu
                 </button>
             </div>
 
-            <div class="mt-12 max-w-lg mx-auto bg-white rounded-xl shadow-lg p-6">
-                <h2 class="text-2xl font-bold text-accent-color mb-4">Pilih Tanggal Kencan Kita!</h2>
-                <div id="calendar-container"></div>
-                <button id="confirm-date-btn" class="mt-6 bg-green-500 text-white font-bold py-3 px-8 rounded-full hover:bg-green-600 transition-colors shadow-lg text-lg hidden">
-                    Konfirmasi Tanggal
-                </button>
+            <div class="mt-12 max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-accent-color mb-4">Siap Merencanakan?</h2>
+                <p class="text-gray-600 mb-6">Setelah memilih tanggal, klik tombol di bawah ini untuk langsung diskusi denganku tentang detail rencana kencan kita via WhatsApp!</p>
+                <a id="whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" class="bg-white text-pink-500 border border-pink-500 font-bold py-3 px-6 rounded-full hover:bg-pink-500 hover:text-white transition-colors shadow-lg flex items-center justify-center mx-auto space-x-3 max-w-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.149-.173.198-.297.297-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.795.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.289.173-1.413z"/></svg>
+                    <span>Hubungi Aku untuk Rencana Kencan!</span>
+                </a>
             </div>
         </section>
     </main>
@@ -131,10 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- CALENDAR LOGIC ---
     const calendarContainer = document.getElementById('calendar-container');
     const confirmDateBtn = document.getElementById('confirm-date-btn');
+    const whatsappBtn = document.getElementById('whatsapp-btn');
     let selectedDate = null;
     
-    // BANTUAN: Tandai tanggal yang tidak tersedia di sini (format: YYYY-MM-DD)
-    const unavailableDates = ["2025-10-21", "2025-10-25", "2025-10-26"];
+    const unavailableDates = {
+        "2025-10-25": "HMIK FEST", 
+        "2025-11-01": "HMIK FEST"
+    };
 
     function renderCalendar(year, month) {
         calendarContainer.innerHTML = '';
@@ -143,10 +125,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let header = document.createElement('div');
         header.className = 'flex justify-between items-center mb-4';
+        
+        const prevMonthBtn = month === 9 && year === 2025 ? '' : '<button id="prev-month" class="p-2 rounded-full hover:bg-pink-100">&lt;</button>';
+        const nextMonthBtn = month === 11 && year === 2025 ? '' : '<button id="next-month" class="p-2 rounded-full hover:bg-pink-100">&gt;</button>';
+        
         header.innerHTML = `
-            <button id="prev-month" class="p-2 rounded-full hover:bg-pink-100">&lt;</button>
+            ${prevMonthBtn}
             <h3 class="font-bold text-lg">${monthNames[month]} ${year}</h3>
-            <button id="next-month" class="p-2 rounded-full hover:bg-pink-100">&gt;</button>
+            ${nextMonthBtn}
         `;
         calendarContainer.appendChild(header);
 
@@ -169,34 +155,40 @@ document.addEventListener('DOMContentLoaded', function() {
             dayEl.textContent = day;
             dayEl.className = 'calendar-day cursor-pointer p-2 rounded-full hover:bg-pink-100';
 
-            if (unavailableDates.includes(currentDateStr)) {
+            if (unavailableDates[currentDateStr]) {
                 dayEl.classList.add('unavailable');
+                dayEl.dataset.note = unavailableDates[currentDateStr];
             } else {
                 dayEl.addEventListener('click', () => {
                     document.querySelectorAll('.calendar-day.selected').forEach(d => d.classList.remove('selected'));
                     dayEl.classList.add('selected');
                     selectedDate = new Date(year, month, day);
+                    const formattedDate = selectedDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
                     confirmDateBtn.classList.remove('hidden');
-                    confirmDateBtn.textContent = `Konfirmasi untuk ${selectedDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+                    confirmDateBtn.textContent = `Konfirmasi untuk ${formattedDate}`;
+                    
+                    const message = `Hai sayang, aku mau kita pergi di tanggal ${formattedDate}. Kita jadi kan? :)`;
+                    // BANTUAN: Ganti 628... dengan nomor WhatsApp Anda
+                    whatsappBtn.href = `https://api.whatsapp.com/send?phone=6281388337828&text=${encodeURIComponent(message)}`;
                 });
             }
             grid.appendChild(dayEl);
         }
         calendarContainer.appendChild(grid);
         
-        document.getElementById('prev-month').addEventListener('click', () => renderCalendar(year, month - 1));
-        document.getElementById('next-month').addEventListener('click', () => renderCalendar(year, month + 1));
+        const prevBtn = document.getElementById('prev-month');
+        if(prevBtn) prevBtn.addEventListener('click', () => renderCalendar(year, month - 1));
+        
+        const nextBtn = document.getElementById('next-month');
+        if(nextBtn) nextBtn.addEventListener('click', () => renderCalendar(year, month + 1));
     }
-
-    const today = new Date();
-    renderCalendar(today.getFullYear(), today.getMonth());
+    
+    renderCalendar(2025, 9); // Mulai dari Oktober 2025 (bulan dihitung dari 0)
 
     confirmDateBtn.addEventListener('click', () => {
-        alert(`Tanggal kencan kita ditetapkan: ${selectedDate.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}! Aku akan segera menghubungimu.`);
-    });
-    
-    document.getElementById('download-btn').addEventListener('click', () => {
-        alert("Fitur ini akan mengunduh itinerary dalam format PDF/JPG. (Fungsi download memerlukan library tambahan atau backend).");
+        if (selectedDate) {
+            alert(`Pilihan tanggalmu, ${selectedDate.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}, sudah disimpan! Sekarang, hubungi aku lewat tombol WhatsApp di bawah ya.`);
+        }
     });
 
     // --- YOUTUBE PLAYER LOGIC ---
@@ -250,3 +242,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+

@@ -8,6 +8,7 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M20,80 h60 v-15 h-60 z' fill='%23E6A4B4'/><path d='M25,65 h50 v-15 h-50 z' fill='%23F3D7CA'/><path d='M30,50 h40 v-15 h-40 z' fill='%23E6A4B4'/><path d='M47,35 h6 v10 h-6 z' fill='white'/><path d='M48,25 a3,5 0 1,0 4,0 l-2,-10 z' fill='orange'/></svg>">
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -23,29 +24,42 @@
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
+            overflow-x: hidden;
         }
         .nav-link.active {
             color: var(--primary-color);
             font-weight: 700;
         }
+        .swiper-container {
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 75%;
+            transition: transform 0.3s ease;
+        }
+        .swiper-slide:not(.swiper-slide-active) {
+            transform: scale(0.85);
+            opacity: 0.6;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-color);
+            top: 45%; 
+        }
+        .swiper-pagination-bullet-active {
+            background-color: var(--primary-color);
+        }
         #video-modal {
             transition: opacity 0.3s ease-in-out;
         }
-        .map-point {
-            animation: pulse 2s infinite;
-            transition: transform 0.3s ease;
+        .play-icon-overlay {
+            transition: opacity 0.3s ease;
         }
-        .map-point:hover {
-            transform: scale(1.2);
-            animation-play-state: paused;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(230, 164, 180, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(230, 164, 180, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(230, 164, 180, 0); }
-        }
-         .music-player {
-            transition: all 0.3s ease-in-out;
+        .swiper-slide:hover .play-icon-overlay {
+            opacity: 1 !important;
         }
     </style>
 </head>
@@ -64,38 +78,97 @@
     </header>
 
     <main class="container mx-auto px-6 py-16">
-        <section id="memory-map" class="text-center">
-            <h2 class="text-3xl font-bold mb-2">Jejak Cerita Kita</h2>
-            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Setiap pulau di peta ini menyimpan ucapan dan kenangan dari orang-orang yang peduli padamu. Klik hati di setiap pulau untuk menemukan harta karun di dalamnya!</p>
+        <section id="galeri" class="text-center">
+            <h2 class="text-3xl font-bold mb-2">Ucapan Spesial Untukmu</h2>
+            <p class="text-gray-600 mb-8">Geser untuk melihat ucapan dari orang-orang terdekatmu.</p>
             
-            <div class="relative w-full max-w-5xl mx-auto aspect-[4/3] rounded-lg shadow-lg overflow-hidden">
-                <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feDropShadow dx="3" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.15"/>
-                        </filter>
-                    </defs>
-                    <rect width="1200" height="900" fill="#F0F4F8"/>
-                    <rect width="1200" height="900" fill="#AED9E0"/>
-                    <path d="M150 700 C 50 650, 80 500, 180 550 C 300 600, 250 750, 150 700 Z" fill="#F3D7CA" filter="url(#shadow)"/>
-                    <path d="M450 600 C 380 580, 390 450, 480 480 C 580 510, 520 620, 450 600 Z" fill="#F3D7CA" filter="url(#shadow)"/>
-                    <path d="M700 750 C 650 700, 680 600, 780 650 C 900 700, 800 800, 700 750 Z" fill="#F3D7CA" filter="url(#shadow)"/>
-                    <path d="M950 450 C 900 400, 930 300, 1030 350 C 1150 400, 1100 500, 950 450 Z" fill="#F3D7CA" filter="url(#shadow)"/>
-                    <path d="M600 250 C 550 200, 580 100, 680 150 C 800 200, 700 300, 600 250 Z" fill="#F3D7CA" filter="url(#shadow)"/>
-                    <path d="M130 580 L 160 530 L 190 580 Z M 150 560 L 170 530" stroke="#788896" stroke-width="3" fill="none" stroke-linecap="round"/>
-                    <path d="M730 680 L 760 630 L 790 680 Z M 750 660 L 770 630" stroke="#788896" stroke-width="3" fill="none" stroke-linecap="round"/>
-                    <circle cx="980" cy="380" r="10" fill="#87A96B"/><line x1="980" y1="380" x2="980" y2="400" stroke="#87A96B" stroke-width="4"/>
-                    <circle cx="630" cy="180" r="10" fill="#87A96B"/><line x1="630" y1="180" x2="630" y2="200" stroke="#87A96B" stroke-width="4"/>
-                    <circle cx="450" cy="500" r="10" fill="#87A96B"/><line x1="450" y1="500" x2="450" y2="520" stroke="#87A96B" stroke-width="4"/>
-                    <path d="M200 650 Q 300 580, 450 550 T 650 300 T 980 380 T 750 620" stroke="#C17C74" stroke-width="3" fill="none" stroke-dasharray="8 8"/>
-                    <text x="50" y="50" font-family="Poppins" font-size="32" fill="#4A4A4A" font-weight="600">Kepulauan Ucapan</text>
-                </svg>
+            <div class="swiper-container w-full max-w-5xl mx-auto">
+                <div class="swiper-wrapper">
+                    
+                    <div class="swiper-slide cursor-pointer" data-video-id="yarY6rCsKCw" data-sender="Mamah Nita">
+                        <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/yarY6rCsKCw/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Mamah Nita">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Mamah Nita</h3>
+                    </div>
+                    
+                    <div class="swiper-slide cursor-pointer" data-video-id="aSAjSn2FrTc" data-sender="Onty Cicing">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/aSAjSn2FrTc/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Onty Cicing">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Onty Cicing</h3>
+                    </div>
 
-                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 70%; left: 12%;" data-video-src="https://www.youtube.com/embed/Sc_1D8a-FzM" data-sender="Teman 1">♥</button>
-                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 58%; left: 37%;" data-video-src="https://www.youtube.com/embed/5qap5aO4i9A" data-sender="Teman 2">♥</button>
-                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 25%; left: 52%;" data-video-src="https://www.youtube.com/embed/3tmd-ClpJxA" data-sender="Teman 3">♥</button>
-                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 42%; left: 83%;" data-video-src="https://www.youtube.com/embed/Sc_1D8a-FzM" data-sender="Teman 4">♥</button>
-                <button class="map-point absolute w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white shadow-lg" style="top: 78%; left: 63%;" data-video-src="https://www.youtube.com/embed/5qap5aO4i9A" data-sender="Teman 5">♥</button>
+                    <div class="swiper-slide cursor-pointer" data-video-id="-X05lNCc2CU" data-sender="Tante Lili Pt.1">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/-X05lNCc2CU/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Tante Lili Pt.1">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Tante Lili Pt.1</h3>
+                    </div>
+
+                    <div class="swiper-slide cursor-pointer" data-video-id="K1E4gfMbgDw" data-sender="Tante Lili Pt.2">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/K1E4gfMbgDw/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Tante Lili Pt.2">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Tante Lili Pt.2</h3>
+                    </div>
+
+                    <div class="swiper-slide cursor-pointer" data-video-id="uC9CD02XeOg" data-sender="Kevin & Ayesha">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/uC9CD02XeOg/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Kevin & Ayesha">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Kevin & Ayesha</h3>
+                    </div>
+
+                    <div class="swiper-slide cursor-pointer" data-video-id="NqS3VT3pXB4" data-sender="Marsya">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/NqS3VT3pXB4/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Marsya">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Marsya</h3>
+                    </div>
+
+                    <div class="swiper-slide cursor-pointer" data-video-id="AzAqXoqahjs" data-sender="Raidah">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/AzAqXoqahjs/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Raidah">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Raidah</h3>
+                    </div>
+
+                    <div class="swiper-slide cursor-pointer" data-video-id="QZCmgJOiopA" data-sender="Sinta">
+                         <div class="relative aspect-video bg-black rounded-lg shadow-lg overflow-hidden">
+                            <img src="https://img.youtube.com/vi/QZCmgJOiopA/hqdefault.jpg" class="w-full h-full object-cover" alt="Thumbnail video ucapan dari Sinta">
+                             <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 play-icon-overlay">
+                                <div class="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8.006v3.988a1 1 0 001.555.838l3.424-1.994a1 1 0 000-1.676l-3.424-1.994z" clip-rule="evenodd" /></svg></div>
+                            </div>
+                        </div>
+                        <h3 class="mt-4 font-semibold text-lg text-gray-700">Ucapan dari: Sinta</h3>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
         </section>
     </main>
@@ -104,7 +177,6 @@
         <div class="relative w-full max-w-4xl">
             <button id="close-video-modal" class="absolute -top-10 right-0 w-10 h-10 text-white text-3xl">&times;</button>
             <div id="video-player-container" class="aspect-video bg-black rounded-lg"></div>
-            <h3 id="video-sender" class="text-white text-center mt-3 font-semibold text-lg"></h3>
         </div>
     </div>
     
@@ -116,32 +188,12 @@
         </button>
     </div>
 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const videoModal = document.getElementById('video-modal');
     const closeVideoModalBtn = document.getElementById('close-video-modal');
     const videoPlayerContainer = document.getElementById('video-player-container');
-    const videoSender = document.getElementById('video-sender');
-    const mapPoints = document.querySelectorAll('.map-point');
-
-    mapPoints.forEach(point => {
-        point.addEventListener('click', () => {
-            const videoSrc = point.dataset.videoSrc;
-            const senderName = point.dataset.sender;
-            if (videoSrc) {
-                videoPlayerContainer.innerHTML = `<iframe class="w-full h-full" src="${videoSrc}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-                videoSender.textContent = `Ucapan dari: ${senderName}`;
-                
-                videoModal.classList.remove('hidden');
-                setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
-                videoModal.classList.add('flex');
-                
-                if (player && typeof player.pauseVideo === 'function') {
-                    player.pauseVideo();
-                }
-            }
-        });
-    });
 
     function closeVideoModal() {
         videoModal.classList.add('opacity-0');
@@ -151,12 +203,49 @@ document.addEventListener('DOMContentLoaded', function() {
             videoPlayerContainer.innerHTML = '';
         }, 300);
     }
-
     closeVideoModalBtn.addEventListener('click', closeVideoModal);
 
-    // --- YOUTUBE PLAYER LOGIC ---
-    const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; // Ganti dengan ID video YouTube yang diinginkan
+    const swiper = new Swiper('.swiper-container', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        on: {
+            click: function (swiper, event) {
+                const clickedSlide = event.target.closest('.swiper-slide');
+                if (clickedSlide && swiper.clickedSlide === clickedSlide) {
+                    const videoId = clickedSlide.dataset.videoId;
+                    if(videoId){
+                        videoPlayerContainer.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                        videoModal.classList.remove('hidden');
+                        setTimeout(() => videoModal.classList.remove('opacity-0'), 10);
+                        videoModal.classList.add('flex');
+                        if (player && typeof player.pauseVideo === 'function') {
+                            player.pauseVideo();
+                        }
+                    }
+                }
+            },
+        },
+    });
 
+    const YOUTUBE_VIDEO_ID = "Xct1EdyHMWw"; 
     const musicControl = document.getElementById('music-control');
     const playIcon = document.getElementById('play-icon');
     const pauseIcon = document.getElementById('pause-icon');
@@ -173,26 +262,18 @@ document.addEventListener('DOMContentLoaded', function() {
             height: '0',
             width: '0',
             videoId: YOUTUBE_VIDEO_ID,
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-                'loop': 1,
-                'playlist': YOUTUBE_VIDEO_ID
-            },
-            events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-            }
+            playerVars: {'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': YOUTUBE_VIDEO_ID},
+            events: {'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange }
         });
     }
 
     function onPlayerReady(event) {
-        // Player siap
+        document.body.addEventListener('click', () => {
+            if (!hasInteracted && player) { player.playVideo(); hasInteracted = true; }
+        }, { once: true });
     }
 
-    function onPlayerStateChange(event) {
-        updatePlayPauseIcon(event.data);
-    }
+    function onPlayerStateChange(event) { updatePlayPauseIcon(event.data); }
 
     function updatePlayPauseIcon(state) {
         if (state === YT.PlayerState.PLAYING) {
@@ -207,19 +288,8 @@ document.addEventListener('DOMContentLoaded', function() {
     musicControl.addEventListener('click', () => {
         if (!player) return;
         const playerState = player.getPlayerState();
-        if (playerState === YT.PlayerState.PLAYING) {
-            player.pauseVideo();
-        } else {
-            player.playVideo();
-        }
+        if (playerState === YT.PlayerState.PLAYING) { player.pauseVideo(); } else { player.playVideo(); }
     });
-
-    document.body.addEventListener('click', () => {
-        if (!hasInteracted && player) {
-            player.playVideo();
-            hasInteracted = true;
-        }
-    }, { once: true });
 });
 </script>
 
